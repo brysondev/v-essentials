@@ -301,6 +301,12 @@ addCommandHandler("ip", (command, params, client) => {
 // ----------------------------------------------------------------------------
 
 addCommandHandler("geoip", (command, params, client) => {
+	// TODO: Potentially fix?
+	if (server.game) {
+		messageClient(`This command is not available.`, client, errorMessageColour);
+		return false;
+	}
+	/*
 	let targetClient = getClientFromParams(params);
 
 	if (targetClient == null) {
@@ -331,6 +337,7 @@ addCommandHandler("geoip", (command, params, client) => {
 	} catch (err) {
 		messageAdmin(`There was an error getting the geoip information for ${targetClient.name}`, client, errorMessageColour);
 	}
+	*/
 });
 
 // ----------------------------------------------------------------------------
