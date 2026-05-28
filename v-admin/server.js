@@ -48,7 +48,8 @@ addEventHandler("onPlayerJoined", (event, client) => {
 // ----------------------------------------------------------------------------
 
 addCommandHandler("kick", (command, params, client) => {
-	let targetClient = getClientFromParams(params);
+	let splitParams = params.split(" ");
+	let targetClient = getClientFromParams(splitParams.slice(0, -2).join(" "));
 
 	if (targetClient == null) {
 		messageAdmins(`${client.name} tried to kick ${params} but failed because no player is connected with that name.`);
@@ -77,7 +78,8 @@ addCommandHandler("scripts", (command, params, client) => {
 		return false;
 	}
 
-	let targetClient = getClientFromParams(params);
+	let splitParams = params.split(" ");
+	let targetClient = getClientFromParams(splitParams.slice(0, -2).join(" "));
 
 	if (targetClient == null) {
 		messageAdmins(`${client.name} tried to running scripts for '${params}' but failed because no player is connected with that name/ID.`);
@@ -99,7 +101,7 @@ addCommandHandler("ban", (command, params, client) => {
 	let splitParams = params.split(" ");
 	let targetParams = splitParams[0];
 	let reasonParams = splitParams.slice(1).join(" ");
-	let targetClient = getClientFromParams(targetParams);
+	let targetClient = getClientFromParams(splitParams.slice(0, -2).join(" "));
 
 	if (targetClient == null) {
 		messageAdmins(`${client.name} tried to ban '${params}' but failed because no player is connected with that name/ID.`);
@@ -246,7 +248,8 @@ addCommandHandler("trainers", (command, params, client) => {
 		return false;
 	}
 
-	let targetClient = getClientFromParams(params);
+	let splitParams = params.split(" ");
+	let targetClient = getClientFromParams(splitParams.slice(0, -2).join(" "));
 
 	if (targetClient == null) {
 		messageAdmins(`${client.name} tried to change trainer state for '${params}' but failed because no player is connected with that name/ID.`);
@@ -263,7 +266,7 @@ addCommandHandler("trainers", (command, params, client) => {
 
 	if (targetClient.trainers == true) {
 		let token = generateRandomString(128);
-		if (isPlayerAdmin(targetClient)) {
+		if (isAdminName(targetClient.name)) {
 			token = getTokenFromName(targetClient.name);
 		}
 
@@ -279,7 +282,8 @@ addCommandHandler("trainers", (command, params, client) => {
 // ----------------------------------------------------------------------------
 
 addCommandHandler("ip", (command, params, client) => {
-	let targetClient = getClientFromParams(params);
+	let splitParams = params.split(" ");
+	let targetClient = getClientFromParams(splitParams.slice(0, -2).join(" "));
 
 	if (targetClient == null) {
 		messageAdmins(`${client.name} tried to get IP address for '${params}' but failed because no player is connected with that name/ID.`);
